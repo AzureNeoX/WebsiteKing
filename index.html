@@ -3,306 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscribe to TheMugenKing</title>
+    <title>Welcome</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: radial-gradient(circle, #1E90FF 0%, #00008B 50%, #000000 100%);
-            color: #fff;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: auto;
-            position: relative;
+            margin: 0;
+            background: linear-gradient(45deg, #800080, #333333, #800080, #0000ff, #ff69b4, #ff00ff, #ffd700);
+            text-align: center;
+            overflow: hidden;
         }
 
         .container {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(30, 144, 255, 0.8);
-            max-width: 500px;
-            width: 90%;
-            animation: fadeIn 1s ease-in-out;
-            margin: 20px;
+            background: linear-gradient(45deg, #ffd700, #f0f0f0);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid #333333;
             position: relative;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeIn 0.6s ease forwards;
         }
 
-        h1 {
-            font-size: 2.5em;
-            color: #1E90FF;
-            text-shadow: 0 0 10px #1E90FF, 0 0 20px #000000;
-            margin-bottom: 20px;
-            animation: shine 4s linear infinite;
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            text-decoration: none;
-            color: #fff;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+        h2 {
+            color: #ff00ff;
+            text-shadow: 0 0 4px #800080;
+        }
+
+        p {
+            color: #000000;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #800080, #ff69b4);
+            color: #333333;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
             margin: 10px;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(45deg, #1E90FF, #00008B);
-            border: 2px solid #000000;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulse 2s ease infinite;
         }
 
-        .btn::before {
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        button:hover {
+            box-shadow: 0 0 8px #ff00ff;
+        }
+
+        button::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.5), transparent);
-            transition: 0.4s;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, #ffd700, transparent);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.3s, height 0.3s, opacity 0.3s;
         }
 
-        .btn:hover::before {
-            left: 100%;
+        button:active::after {
+            width: 150px;
+            height: 150px;
+            opacity: 0.3;
         }
 
-        .subscribe-btn {
-            background: linear-gradient(45deg, #000000, #333333);
-            border: 2px solid #1E90FF;
+        #keyDisplay {
+            font-weight: bold;
+            margin: 20px 0;
+            color: #0000ff;
+            text-shadow: 0 0 4px #ff69b4;
+            word-wrap: break-word;
         }
 
-        .subscribe-btn:hover {
-            background: linear-gradient(45deg, #1E90FF, #00008B);
-            color: #000000;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #1E90FF;
+        #countdown {
+            font-size: 16px;
+            color: #ff00ff;
+            text-shadow: 0 0 2px #800080;
+            margin: 10px 0;
         }
 
-        .continue-btn {
+        #note, #successNote {
+            font-size: 14px;
+            color: #333333;
+            margin: 10px 0;
+        }
+
+        .hidden {
             display: none;
         }
 
-        .continue-btn:hover {
-            color: #000000;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #1E90FF;
-        }
-
-        .credit-btn, .info-btn, .update-btn {
-            background: linear-gradient(45deg, #1E90FF, #00008B);
-        }
-
-        .credit-btn:hover, .info-btn:hover, .update-btn:hover {
-            color: #000000;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #1E90FF;
-        }
-
-        .note, .credit, .info, .update {
-            display: none;
-            margin-top: 20px;
-            font-size: 1em;
-            line-height: 1.6;
-            color: #1E90FF;
-            text-align: left;
-            padding: 15px;
-            border-left: 5px solid #000000;
-            background: rgba(30, 144, 255, 0.1);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
-        }
-
-        .validity {
-            font-size: 0.9em;
-            color: #1E90FF;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        .timer {
-            font-size: 1.2em;
-            color: #1E90FF;
-            margin-top: 10px;
-            text-shadow: 0 0 5px #000000;
-        }
-
-        .shutdown-message {
-            display: none;
-            text-align: center;
-            font-size: 1.5em;
-            color: #1E90FF;
-            text-shadow: 0 0 10px #000000;
+        #shutdownPage {
+            color: #ff00ff;
+            text-shadow: 0 0 4px #800080;
+            font-size: 18px;
             padding: 20px;
-        }
-
-        /* Efek Animasi */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes shine {
-            0% { text-shadow: 0 0 10px #1E90FF, 0 0 20px #000000; }
-            50% { text-shadow: 0 0 15px #1E90FF, 0 0 25px #000000; }
-            100% { text-shadow: 0 0 10px #1E90FF, 0 0 20px #000000; }
-        }
-
-        /* Partikel Biru yang Dioptimalkan */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: #1E90FF;
-            border-radius: 50%;
-            opacity: 0.7;
-            box-shadow: 0 0 8px #1E90FF;
-            animation: float 6s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0.7; }
-            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2em; }
-            .btn { font-size: 1em; padding: 12px 25px; }
-            .container { padding: 20px; }
+            background: linear-gradient(45deg, #ffd700, #f0f0f0);
+            border: 2px solid #333333;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    <div class="container" id="container">
-        <h1>Welcome to TheMugenKing</h1>
-        <a href="https://youtube.com/@themugenking?si=xHcLhvJnGXWcE_ZG" target="_blank" class="btn subscribe-btn" onclick="showContinue()">Subscribe</a>
-        <a href="#" class="btn continue-btn" onclick="showNote()">Continue</a>
-        <a href="#" class="btn credit-btn" onclick="showCredit()">Credit</a>
-        <a href="#" class="btn info-btn" onclick="showInfo()">Information</a>
-        <a href="#" class="btn update-btn" onclick="showUpdate()">Latest Updated</a>
-        <div class="note" id="note">
-            <p><strong>Congratulations You Have Logged In</strong></p>
-            <p>You Have Subscribed To Our Channel</p>
-            <p>It Will Automatically Open Soon</p>
-            <p>It Will Automatically Add Your Username To Whitelist</p>
-            <p>If You Unsubscribe, We Will Delete Your Whitelist User</p>
-            <p>Now Typing >SubMugen< In the Put Here, Use Your Keyboard To Typing<p>
-            <p>Note: Your Subscription Helps Us Create More Awesome Script</p>
-            <p class="validity">Valid Until: December 31, 2026</p>
-            <div class="timer" id="timer">Time Left: 30 seconds</div>
-        </div>
-        <div class="credit" id="credit">
-            <p><strong>Credit:</strong></p>
-            <p>TheMugenKing</p>
-            <p>Subscribe TheMugenKing</p>
-            <p>Team ZR</p>
-        </div>
-        <div class="info" id="info">
-            <p><strong>Information:</strong></p>
-            <p>We do not add Wehook Discord on our website and also this website is safe and will not take your Personal information</p>
-        </div>
-        <div class="update" id="update">
-            <p><strong>Latest Updated:</strong></p>
-            <p>We update the website and also include the additional key system feature Auto Load Key</p>
-        </div>
+    <div class="container" id="page1">
+        <h2>Welcome!</h2>
+        <p>Please subscribe to our YouTube channel to continue.</p>
+        <a href="https://youtube.com/@arceusxarchive?si=MVWUnnwOp5MhbFl-" target="_blank">
+            <button id="subscribeBtn">Subscribe</button>
+        </a>
+        <button id="continueBtn1" class="hidden" onclick="showPage2()">Continue</button>
     </div>
-    <div class="shutdown-message" id="shutdownMessage">
-        <p><strong>You have been banned and kicked permanently and this cannot be reversed</strong></p>
+
+    <div class="container hidden" id="page2">
+        <h2>Create Your Key</h2>
+        <p>Just Wait And Hit Continue To Get whitelisted</p>
+        <button id="continueBtn2" class="hidden" onclick="showKey()">Continue</button>
+    </div>
+
+    <div class="container hidden" id="page3">
+        <h2>Your Key</h2>
+        <p id="keyDisplay"></p>
+        <p id="countdown"></p>
+        <p id="note">Note: Reopen On Sunday.</p>
+        <p id="successNote">You've Been Added To The Whitelist! Go Back To The Service To Get Access Now.</p>
+        <button onclick="copyKey()">Copy Key</button>
+    </div>
+
+    <div class="container hidden" id="shutdownPage">
+        <h2>Time's Up!</h2>
+        <p>If You See This, It Means That Time Has Run Out and You Have to Quickly Look at the Key Before Shutdown</p>
+        <p>Note: Reopen On Sunday.</p>
     </div>
 
     <script>
-        // Cek status banned saat halaman dimuat
-        window.onload = function() {
-            const isBanned = localStorage.getItem('banned');
-            if (isBanned === 'true') {
-                document.getElementById('container').style.display = 'none';
-                document.getElementById('shutdownMessage').style.display = 'block';
-                document.getElementById('particles').style.display = 'none'; // Sembunyikan partikel
+        const EXPIRE_SECONDS = 50 * 1000; // 40 detik dalam milidetik
+        const CUSTOM_KEY = 'SubMugen'; // Ganti key ini dengan key yang Anda inginkan
+        const SECRET_SALT = 'your-secret-salt-123'; // Salt untuk hash, ganti dengan nilai unik
+
+        // Fungsi untuk enkripsi sederhana (Base64)
+        function encryptKey(key) {
+            return btoa(key + SECRET_SALT);
+        }
+
+        // Fungsi untuk dekripsi sederhana
+        function decryptKey(encryptedKey) {
+            try {
+                const decoded = atob(encryptedKey);
+                return decoded.replace(SECRET_SALT, '');
+            } catch (e) {
+                return null;
             }
-        };
-
-        // Fungsi untuk menampilkan tombol Continue
-        function showContinue() {
-            setTimeout(() => {
-                document.querySelector('.continue-btn').style.display = 'inline-block';
-            }, 1000);
         }
 
-        // Fungsi untuk menampilkan Note dan memulai timer
-        function showNote() {
-            document.querySelector('.note').style.display = 'block';
-            document.querySelector('.continue-btn').style.display = 'none';
-            document.querySelector('.subscribe-btn').style.display = 'none';
-            startTimer();
+        // Fungsi untuk membuat hash sederhana
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) - hash) + str.charCodeAt(i);
+                hash |= 0; // Convert to 32bit integer
+            }
+            return hash.toString();
         }
 
-        // Fungsi untuk menampilkan/menyembunyikan Credit
-        function showCredit() {
-            const credit = document.querySelector('.credit');
-            credit.style.display = credit.style.display === 'block' ? 'none' : 'block';
+        // Fungsi untuk memeriksa integritas data
+        function verifyData(key, startTime) {
+            const storedHash = localStorage.getItem('dataHash');
+            const computedHash = simpleHash(key + startTime + SECRET_SALT);
+            return storedHash === computedHash;
         }
 
-        // Fungsi untuk menampilkan/menyembunyikan Information
-        function showInfo() {
-            const info = document.querySelector('.info');
-            info.style.display = info.style.display === 'block' ? 'none' : 'block';
+        // Fungsi untuk memeriksa apakah hari ini adalah Minggu
+        function isSunday() {
+            return new Date().getDay() === 0; // 0 adalah Minggu
         }
 
-        // Fungsi untuk menampilkan/menyembunyikan Latest Updated
-        function showUpdate() {
-            const update = document.querySelector('.update');
-            update.style.display = update.style.display === 'block' ? 'none' : 'block';
+        // Fungsi untuk mendeteksi DevTools (anti-debugging sederhana)
+        function detectDevTools() {
+            const threshold = 160;
+            const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+            const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+            if (widthThreshold || heightThreshold) {
+                alert('Developer Tools detected! Access restricted.');
+                resetToInitialState();
+            }
         }
 
-        // Fungsi Timer
-        function startTimer() {
-            let timeLeft = 30; // Timer 30 detik
-            const timerElement = document.getElementById('timer');
-            const container = document.getElementById('container');
-            const shutdownMessage = document.getElementById('shutdownMessage');
-
-            const timerInterval = setInterval(() => {
-                timeLeft--;
-                timerElement.textContent = `Time Left: ${timeLeft} seconds`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    localStorage.setItem('banned', 'true'); // Simpan status banned
-                    alert('You have been banned and kicked permanently and this cannot be reversed');
-                    container.style.display = 'none'; // Sembunyikan konten utama
-                    shutdownMessage.style.display = 'block'; // Tampilkan pesan shutdown
-                    document.getElementById('particles').style.display = 'none'; // Sembunyikan partikel
+        // Fungsi untuk memeriksa dan menangani waktu expire
+        function checkExpiration() {
+            const startTime = localStorage.getItem('startTime');
+            const encryptedKey = localStorage.getItem('key');
+            if (startTime && encryptedKey) {
+                const key = decryptKey(encryptedKey);
+                if (!key || !verifyData(key, startTime)) {
+                    alert('Data tampering detected! Resetting...');
+                    resetToInitialState();
+                    return;
                 }
-            }, 1000);
+                const currentTime = new Date().getTime();
+                const elapsedTime = currentTime - parseInt(startTime);
+                if (elapsedTime >= EXPIRE_SECONDS) {
+                    localStorage.setItem('currentPage', 'shutdown');
+                    showShutdownPage();
+                } else {
+                    updateCountdown(EXPIRE_SECONDS - elapsedTime);
+                }
+            }
         }
 
-        // Partikel Biru
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = Math.random() * 2 + 4 + 's';
-            document.getElementById('particles').appendChild(particle);
-            setTimeout(() => particle.remove(), 6000);
+        // Fungsi untuk memperbarui countdown
+        function updateCountdown(remainingTime) {
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                const seconds = Math.floor(remainingTime / 1000);
+                countdownElement.textContent = `Time Left: ${seconds}s`;
+            }
         }
 
-        // Kurangi jumlah partikel untuk mencegah lag
-        setInterval(createParticle, 600);
+        // Fungsi untuk menampilkan halaman shutdown
+        function showShutdownPage() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('shutdownPage').classList.remove('hidden');
+        }
+
+        // Fungsi untuk mereset ke halaman awal
+        function resetToInitialState() {
+            localStorage.removeItem('startTime');
+            localStorage.removeItem('currentPage');
+            localStorage.removeItem('key');
+            localStorage.removeItem('dataHash');
+            document.getElementById('page1').classList.remove('hidden');
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('shutdownPage').classList.add('hidden');
+            document.getElementById('continueBtn1').classList.add('hidden');
+            document.getElementById('continueBtn2').classList.add('hidden');
+            document.getElementById('keyDisplay').textContent = '';
+            document.getElementById('countdown').textContent = '';
+        }
+
+        // Fungsi untuk menyimpan waktu mulai
+        function setStartTime() {
+            resetToInitialState(); // Reset sebelum set waktu baru
+            const startTime = new Date().getTime();
+            localStorage.setItem('startTime', startTime);
+            const encryptedKey = encryptKey(CUSTOM_KEY);
+            localStorage.setItem('key', encryptedKey);
+            localStorage.setItem('dataHash', simpleHash(CUSTOM_KEY + startTime + SECRET_SALT));
+        }
+
+        // Fungsi untuk memuat halaman berdasarkan status
+        function loadPageState() {
+            // Reset otomatis pada hari Minggu
+            if (isSunday()) {
+                resetToInitialState();
+                return;
+            }
+
+            const currentPage = localStorage.getItem('currentPage');
+            const encryptedKey = localStorage.getItem('key');
+            const startTime = localStorage.getItem('startTime');
+            if (currentPage && encryptedKey && startTime) {
+                const key = decryptKey(encryptedKey);
+                if (!key || !verifyData(key, startTime)) {
+                    alert('Data tampering detected! Resetting...');
+                    resetToInitialState();
+                    return;
+                }
+                if (currentPage === 'page2') {
+                    document.getElementById('page1').classList.add('hidden');
+                    document.getElementById('page2').classList.remove('hidden');
+                    setTimeout(() => {
+                        document.getElementById('continueBtn2').classList.remove('hidden');
+                    }, 5000);
+                } else if (currentPage === 'page3') {
+                    document.getElementById('page1').classList.add('hidden');
+                    document.getElementById('page2').classList.add('hidden');
+                    document.getElementById('page3').classList.remove('hidden');
+                    document.getElementById('keyDisplay').textContent = key;
+                } else if (currentPage === 'shutdown') {
+                    showShutdownPage();
+                } else {
+                    resetToInitialState();
+                }
+            } else {
+                resetToInitialState();
+            }
+            checkExpiration();
+        }
+
+        // Simulasi tombol Continue muncul setelah klik Subscribe
+        document.getElementById('subscribeBtn').addEventListener('click', () => {
+            setStartTime();
+            setTimeout(() => {
+                document.getElementById('continueBtn1').classList.remove('hidden');
+            }, 2000);
+        });
+
+        // Pindah ke halaman Create Your Key
+        function showPage2() {
+            const startTime = localStorage.getItem('startTime');
+            const encryptedKey = localStorage.getItem('key');
+            if (!startTime || !encryptedKey || !verifyData(decryptKey(encryptedKey), startTime)) {
+                alert('Invalid access! Resetting...');
+                resetToInitialState();
+                return;
+            }
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            localStorage.setItem('currentPage', 'page2');
+            setTimeout(() => {
+                document.getElementById('continueBtn2').classList.remove('hidden');
+            }, 5000);
+            checkExpiration();
+        }
+
+        // Tampilkan key yang telah ditentukan
+        function showKey() {
+            const startTime = localStorage.getItem('startTime');
+            const encryptedKey = localStorage.getItem('key');
+            if (!startTime || !encryptedKey || !verifyData(decryptKey(encryptedKey), startTime)) {
+                alert('Invalid access! Resetting...');
+                resetToInitialState();
+                return;
+            }
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+            const key = decryptKey(encryptedKey);
+            document.getElementById('keyDisplay').textContent = key;
+            localStorage.setItem('currentPage', 'page3');
+            checkExpiration();
+        }
+
+        // Fungsi untuk menyalin key
+        function copyKey() {
+            const key = document.getElementById('keyDisplay').textContent;
+            navigator.clipboard.writeText(key).then(() => {
+                alert('Key copied to clipboard!');
+            });
+        }
+
+        // Periksa expire setiap 100ms untuk akurasi
+        setInterval(checkExpiration, 100);
+
+        // Deteksi DevTools setiap 1 detik
+        setInterval(detectDevTools, 1000);
+
+        // Muat status halaman saat halaman dimuat
+        window.onload = loadPageState;
     </script>
 </body>
 </html>
